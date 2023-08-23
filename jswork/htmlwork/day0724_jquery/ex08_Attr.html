@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Gugi&family=Pangolin&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <title>Document</title>
+    <script>
+        $(function () {
+            //모든 img태그에 마우스를 올리면 src변경
+            /* $("img").mouseover(function(){
+                 imgName=$(this).attr("src");
+                 $(this).attr("src","../Food/10.jpg");
+             });
+             //마우스 벗어나면 원래사진으로 돌아가기
+             $("img").mouseout(function(){
+                 $(this).attr("src",imgName);
+             });
+             */
+            //h3_hover 이용해서 배경색 변경
+            $("h3").hover(function () {
+                $(this).css("background-color", "red");
+            }, function () {
+                $(this).css("background-color", "white");
+            });
+            //0번 이미지를 클릭하면 2번 img의 src에 같은 이미지 넣기,너비도
+            $("img:eq(0)").click(function () {
+                var img0 = $(this).attr("src"); //0번이미지의 src 가져와서 img0에 저장
+                var width0 = $(this).attr("width"); //0번이미지의 width 가져와서 width0에 저장
+                // $("img:eq(2)").attr("src","../연예인사진/12.jpg"); //2번째 이미지 src를 저주소로 변경
+                $("img:eq(2)").attr("src", img0); //2번이미지 src값을 img0에 저장한 src값 가져와서변경
+                $("img:eq(2)").attr("width", width0);//2번이미지 width값을 img0에 저장한 width값 가져와서변경
+                //$("img:eq(2)").css("width","100"); //가져와서 css 써도됨 
+
+                //irum속성 얻어서 2번 img 다음에 b태그로 넣기
+                //after: 특정대그 이후 추가
+                //append : 특정 태그 안에 추가
+                var irum = $(this).attr("irum");
+                $("img:eq(2)").after("<b>" + irum + "</b><br>");
+
+            });
+
+            //figure 아래 img 클릭하면 아래사진 4개에 나타나게 하시오
+            //gt 이용하면 이후 모두....
+            $("figure img").click(function () {
+                var foodImg = $(this).attr("src");
+                $("img:gt(2)").attr("src", foodImg);
+
+
+                //클릭한 이미지의 다음태그 안의 text를 얻어서 2번째 h3에 넣기
+                //next():다음태그
+                //prev():이전태그
+                //html():js의 innerHTML
+                //text():js의 innerText
+                var foodName = $(this).next().text();
+                $("h3:last").text(foodName); //h3 : eq(1)
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <img src="../연예인사진/12.jpg" width="100" irum="박보영">
+    <h3>이미지 속성 변경하기</h3>
+    <hr>
+    <figure>
+        <img src="../Food/1.jpg">
+        <figcaption>샌드위치</figcaption>
+    </figure>
+    <figure>
+        <img src="../Food/11.jpg">
+        <figcaption>망고빙수</figcaption>
+    </figure>
+
+    <h3>figure아래 이미지 클릭하면 여기 아래 이미지가 바뀜</h3>
+    <img src="" alt="사진1" width="100">
+    <img src="" alt="사진2" width="100">
+    <img src="" alt="사진3" width="100">
+    <img src="" alt="사진4" width="100">
+</body>
+
+</html>

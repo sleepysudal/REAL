@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/btnstyle.css">
+    <link rel="stylesheet" href= "../css/bts.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Gugi&family=Pangolin&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>        
+       /*bts css 파일에 작성해서 불러옴*/
+       body {
+        font-family: 'Gugi';
+       }
+    </style>
+    <script>
+        window.onload = function () {
+            var img1 = document.getElementById("img1");
+            var img2 = document.getElementById("img2");
+            var btn1 = document.getElementById("btn1");
+
+            //1.이미지
+            img1.onclick = function () {
+                img1.setAttribute("src", "../Food/5.jpg");
+            }
+            img1.onmouseover = function(){
+                img1.setAttribute("src","../Food/3.jpg");
+            }
+            img1.onmouseout = function(){
+                img1.setAttribute("src","../Food/1.jpg")
+            }
+            //2. 이미지
+            img2.onclick = function () {
+                var src = img2.getAttribute("src");
+                var width = img2.getAttribute("width");
+                var height = img2.getAttribute("height");
+
+                result.innerHTML = (src + " " + width + "px " + height + " px");
+
+            }
+
+            //4 버튼
+            document.getElementById("btn1").onclick = function () {
+
+                var name = prompt("이름을 입력해주세요", name);
+
+                if (name == null)
+                    alert("입력이 없습니다");
+                else
+                    bts.innerHTML = ("내이름은 " + name + "입니다")
+
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <h3>1. 만화이미지 01.png~10png 출력 for문 사용</h3>
+    <script>
+        /*
+        for(var i=0; i<10; i++){
+            document.write("<img src=../만화이미지/+'i'+.png>");
+        }
+        
+        */
+        
+        for (var i = 1; i <= 10; i++) {
+            var imgname = "../만화이미지/" + (i < 10 ? "0" : "") + i + ".png";
+            var s = "<img src='" + imgname + "'width='50' height ='50'border='1'>";           
+           
+            document.write(s);
+
+            if (i % 5 == 0)
+                document.write("<br><br>");
+
+        } 
+    </script>
+
+    <hr>
+    <h3>2.누르면 이미지 변경, 마우스 대면 변경 떼면 원상복구</h3>
+    <img src="../Food/1.jpg" width="300" id="img1" border="1">
+
+    <hr>
+    <h3>3.이미지 누르면 div에 값출력</h3>
+    <img src="../img/iu1.jpg" width="200" height="180" border="1" id="img2">
+    <div id="result" class="result"></div>
+
+    <hr>
+    <h3>4. prompt로 값 받고 div에 출력(div창은 css로 꾸미기)</h3>
+    <button type="button" id="btn1" class="btn btn-gold">버튼</button>
+    <div id ="bts" class="bts"></div>
+</body>
+
+</html>
+
+<!--  1. 만화이미지 01.png~10.png까지 출력하세요(for문이용)-->
+
+
+<!--  2. 음식사진 1.jpg를 img태그로 나타낸후 id를 img1으로 주고
+    그아이디로 이벤트 추가합니다
+사진에 마우스를 올리면 3.jpg로 바뀌고 클릭하면 5.jpg로 바뀌며
+마우스를 벗어나면 다시 원래사진으로 돌아가게 이벤트 주기-->
+
+
+<!--  3. img로 width=200 height=180으로 사진(아무거나)body에 넣은후
+        이미지를 클릭하면 아래 div태그안에 각종정보(src,width,height)를
+        얻어서 출력하시오( getAttribute,innerHTML 사용)
+    -->
+<!--
+        4. 버튼을 하나 만든후 클릭하면 prompt창에 이름을 입력받아서 div태그안에
+        "내이름은 *** 입니다" 라고 출력하세요
+        (div에 class="bts"라고 준후 css로 예쁘게 스타일 적용할것!!!)
+    -->

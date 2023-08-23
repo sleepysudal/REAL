@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Gugi&family=Pangolin&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <title>Document</title>
+    <style>
+        div {
+            width: 500px;
+            height: 150px;
+            text-align: center;
+            line-height: 150px;
+            font-size: 13pt;
+            margin-bottom: 10px;
+        }
+
+        .hello_0 {
+            border: 10px groove orchid;
+            font-family: "Gugi";
+            background-color: aliceblue;
+            color: brown;
+        }
+
+        .hello_1 {
+            border: 10px groove gainsboro;
+            font-family: "Gugi";
+            background-color: greenyellow;
+            color: salmon;
+        }
+
+        .hello_2 {
+            border: 10px groove green;
+            font-family: "Gugi";
+            background-color: magenta;
+            color: black;
+        }
+
+        .hello_3 {
+            border: 10px groove red;
+            font-family: "Gugi";
+            background-color: burlywood;
+            color: skyblue;
+        }
+
+        .hello_4 {
+            border: 10px groove orange;
+            font-family: "Gugi";
+            background-color: darkblue;
+            color: snow;
+        }
+    </style>
+    <script>
+        $(function () {
+            //적용버튼 누르면 모든 div에 인덱스별로 적용된다(addClass)
+            $("button:eq(0)").click(function () {
+                //div에 차례대로 hello_0에서 hello_4까지 적용
+                    $("div").each(function (idx) { //index, element(생략가능)
+                    $(this).addClass("hello_" + idx);
+                });
+            });
+            //제거버튼 누르면 인덱스별 적용된 클래스가 제거된다(removeClass)
+            $("button:eq(1)").click(function() {
+                $("div").each(function(idx){
+                    $(this).removeClass();  //모든클래스 제거 
+                });
+            });
+        });
+        /* $("button:eq(1)").click(function() {           
+                    $("div").removeClass();                  
+            }); */
+    </script>
+</head>
+
+<body>
+    <button type="button" class="btn btn-outline-info" >스타일 적용</button>
+    <button type="button" class="btn btn-outline-danger">스타일 제거</button>
+
+    <div>안녕하세요</div>
+    <div>오늘은 제이커리</div>
+    <div>반복문과 addClass를</div>
+    <div>배우고 있어요</div>
+    <div>제발!!!</div>
+</body>
+
+</html>

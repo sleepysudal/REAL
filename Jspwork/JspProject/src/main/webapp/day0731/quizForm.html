@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Gugi&family=Pangolin&display=swap"
+		rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	<title>Insert title here</title>
+
+</head>
+
+<body>
+	<form action="quizAction.jsp" method="post">
+		<!--메소드 겟이면 주소창에 정보 뜨고 get이면 안뜬다-->
+		<table class="table table-bordered" style="width:400px;">
+
+			<tr>
+				<th>상품명</th>
+				<td>
+					<input type="text" name="sangpum" placeholder="상품명" required="required" class="form-control"
+						style="width: 100px;">
+				</td>
+			</tr>
+
+			<tr>
+				<th>사이즈</th>
+				<td>
+					<label><input type="radio" name="size" value="100">100</label>
+					<label><input type="radio" name="size" value="200">200</label>
+					<label><input type="radio" name="size" value="300">300</label>
+					<label><input type="radio" name="size" value="400">400</label>
+					<label><input type="radio" name="size" value="500">500</label>
+				</td>
+			</tr>
+
+			<tr>
+				<th>색상</th>
+				<td>
+				<label><input type="checkbox" name="color" value="red">Red</label>
+				<label><input type="checkbox" name="color" value="orange">Orange</label>
+				<label><input type="checkbox" name="color" value="yellow">Yellow</label>
+				<label><input type="checkbox" name="color" value="green">Green</label>
+				<label><input type="checkbox" name="color" value="blue">Blue</label>
+				</td>
+			</tr>
+
+			<tr>
+				<th>추가상품</th>
+				<td>
+					<select size="2" name="addsangpum" multiple="multiple" style="width: 100px;">
+						<option value="호랑이">호랑이</option>
+						<option value="사자">사자</option>
+						<option value="수달">수달</option>
+						<option value="낙타">낙타</option>
+						<option value="라마">라마</option>
+						<option value="알파카">알파카</option>
+					</select>
+				</td>
+			</tr>
+
+
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="서버로 전송" class="btn btn-success">
+				</td>
+			</tr>
+
+		</table>
+	</form>
+</body>
+
+</html>

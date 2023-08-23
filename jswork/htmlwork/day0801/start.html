@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Gugi&family=Pangolin&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <title>Document</title>
+    <style>
+       #btn1{
+        position: absolute;
+        top:0px;
+        left:100px;
+        width:100px;
+        height:100px;
+        background-color: red;
+        border:2px solid red;
+       }
+       #btn2{
+        position: absolute;
+        top:0px;
+        left:200px;
+        width:100px;
+        height:100px;
+        background-color: orange;
+        border:2px solid orange;
+       }
+       #btn3{
+        position: absolute;
+        top:0px;
+        left:300px;
+        width:100px;
+        height:100px;
+        background-color: yellow;
+        border:2px solid yellow;
+       }
+       #btn4{
+        position: absolute;
+        top:0px;
+        left:400px;
+        width:100px;
+        height:100px;
+        background-color: green;
+        border:2px solid green;
+       }#btn5{
+        position: absolute;
+        top:0px;
+        left:500px;
+        width:100px;
+        height:100px;
+        background-color: blue;
+        border:2px solid blue;
+       }
+       #btn6{
+        position: absolute;
+        top:1000px;
+        left:1000px;
+        width:100px;
+        height:100px;
+        background-color: purple;
+        border:2px solid purple;
+       }
+
+       #img1{
+        width:95px;
+        height:95px;
+        position: absolute; 
+        border:5px solid gray;     
+        
+       }
+       #img2{
+        width:2000px;
+        height:2000px;
+        position: absolute;        
+       }
+    </style>
+    <script>
+        $(function(){
+            $("#btn6").click(function(){
+                window.scrollTo(0, 0);         
+            });
+        });
+    </script>
+</head>
+<body>   
+     <!--0,0 위치한 이미지 -->
+    <img src="../html_img/1.png" id="img1">
+    
+    <!--배경화면-->
+    <img src="../html_img/2.png" id="img2">
+
+    <!--0 100 위치한 버튼--> 
+    <label> <button type="button" class="btn btn-outline-btn" id="btn1"></button></label>
+    
+    <!--0 200 위치한 버튼--> 
+    <label> <button type="button" class="btn btn-outline-btn" id="btn2"></button></label>
+    
+    <!--0 300 위치한 버튼--> 
+    <label> <button type="button" class="btn btn-outline-btn" id="btn3"></button></label>
+    
+    <!--0 400 위치한 버튼--> 
+    <label> <button type="button" class="btn btn-outline-btn" id="btn4"></button></label>
+    
+    <!--0 500 위치한 버튼--> 
+    <label> <button type="button" class="btn btn-outline-btn" id="btn5"></button></label>
+
+    <!--1000 1000 위치한 버튼 누르면 상단으로 이동 -->
+    <label><button type=button id="btn6"></button></label>
+
+
+</body>
+</html>

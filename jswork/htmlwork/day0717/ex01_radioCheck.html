@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+    <table>Document</table>
+    <style>
+        table{
+            border: 2px solid gray;
+            width: 500px;
+        }
+        tr,th,td{
+            border: 1px dotted gray;
+            font-size: 10pt;
+        }
+    </style>
+<body> 
+<form>
+    <table>
+        <caption><b>Radio&check</b></caption>
+        <tr height="30">
+            <td>
+                <b>최종학력을 선택하시오</b>
+                <!-- radio는 name이 동일해야한다 -->
+                <input type="radio" name="grade" value="고등학교" checked>고등학교&nbsp;
+                <input type="radio" name="grade" value="전문대학">전문대학&nbsp;
+                <input type="radio" name="grade" value="대학교">대학교&nbsp;
+                <input type="radio" name="grade" value="대학원">대학원&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>본인이 가능한 프로그램 언어</b>
+                <!-- checkbox는 중복선택 가능, name이 동일해야한다-->
+                <input type="checkbox" name="lang" value="C언어">C언어&nbsp;
+                <input type="checkbox" name="lang" value="JAVA">JAVA&nbsp;
+                <input type="checkbox" name="lang" value="ORACLE">ORACLE&nbsp;
+                <input type="checkbox" name="lang" value="SPRING">SPRING&nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>이미지선택</b>
+                <input type="file">
+            </td>    
+        </tr>
+        <tr>
+            <td>
+                <b>우리반에서 가장친한친구</b>
+                 <select>
+                    <option value="홍길동">홍길동</option>
+                    <option value="짱구">짱구</option>
+                    <option value="철수" selected>철수</option>
+                    <option value="유리">유리</option>
+                    <option value="맹구">맹구</option>
+                    <option value="훈이">훈이</option>
+                 </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>가장 좋아하는 색은</b>
+                 <input type="color" value="#ffccff">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>당신의 키는 몇cm 인가요?</b>
+                 <input type="number" name="height" min="150" max="200"
+                 value="150" step="2">cm
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>당신의 몸무게는 몇kg 인가요?</b>
+                 <input type="number" name="weight" min="40" max="100"
+                 value="50" step="3">kg
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <b>당신의 생년월일?</b>
+                <input type="date" value="2000-01-01">
+            </td>
+        </tr>
+    
+        <tr>
+            <td align="center">
+                <input type="button" value="서버에 전송">
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

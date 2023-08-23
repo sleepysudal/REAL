@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Gugi&family=Pangolin&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <img src="">
+    <img src="">
+    <img src="">
+    <img src="">
+    <img src="">
+
+    <script>
+        //모든 이미지에 같은 이미지 넣고 너비 보더 css 적용
+       
+            $("img").attr("src","../html_img/2.png").css({
+                "width":"200px",
+                "height":"200px",
+                "border":"5px dashed orange"
+            });
+
+            //랜덤이미지 5개 배열
+            var imgarr=new Array(5);
+
+            imgarr[0]="../html_img/cook1.jpg";
+            imgarr[1]="../html_img/cook2.jpg";
+            imgarr[2]="../html_img/cook3.jpg";
+            imgarr[3]="../html_img/cook4.jpg";
+            imgarr[4]="../html_img/cook5.jpg";
+            
+            //img태그에 마우스 올리면 5개의 랜덤이미지 중에서 하나가 선택           
+            $("img").hover(function(){               
+                curimg=$(this).attr("src");
+                var random=parseInt((Math.random()*5));               
+               $(this).attr("src",imgarr[random]);
+            }, 
+            //마우스가 벗어나면 다시 원래의 이미지가 된다
+            function(){             
+               var imgname=$("img").attr("src");
+               $("img").attr("src",curimg);       
+            });
+           
+           
+           
+    </script>
+</body>
+</html>

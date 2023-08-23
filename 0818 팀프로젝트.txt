@@ -1,0 +1,21 @@
+매번 해야하는게 
+
+1. 누군가 빈 레퍼지토리 생성한다
+2. 그리고 그 레퍼지토리에 팀원들 초대한다
+3. 만든사람이 git init 치고 git remote add origin 깃링크  치고 폴더만들고 파일 그냥메모장같은거만들고 git add git commit -m "1" git push origin master  까지 한다 
+
+4. 다른 사람이 빈폴더에 git clone 깃링크 하고 
+거기서 생긴 폴더로 가서 깃배쉬 키고 
+거기서 git branch "원하는브랜치명" 하고 
+본인이올리고싶은 파일 넣고 
+git add . 
+git commit -m "1"
+git push origin "브랜치명"
+
+그다음에 git checkout master 가서 
+git pull origin master - 남이 작업한게잇을수도잇으니 받아서 최신화
+git merge "내가만든브랜치명"  -로컬에 잇는 파일이 바뀜 
+git push origin master - 원격저장소에 잇는 파일까지 수정 
+
+
+

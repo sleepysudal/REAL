@@ -1,0 +1,17 @@
+div {
+    font-size: 100px;
+    font-style: color="red";
+    background-color: aqua;
+    text-align: center;
+    border-radius: 300px;
+    width: 300px;
+    height: 300px;
+    line-height: 300px;
+    box-shadow: 10px 10px 10px gray;
+    border: solid 5px crimson;
+    color:blueviolet;
+    margin-top: 50px;
+    float:left;
+    
+    
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            width: 70px;
+            height: 80px;
+            border: 1px solid gray;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>배열_초기값 지정</h3>
+    <script>
+        var arr1 = ["../연예인사진/6.jpg",
+            "../연예인사진/17.jpg", "../만화이미지/11.png",
+            "../flower_ani/f14.png", "../flower_ani/f18.png"];
+
+        var s = "배열갯수: " + arr1.length;
+
+
+        //for문
+        for (var i = 0; i < arr1.length; i++) {
+            //var img1 = "<img src='" + arr1[i] + "'>";            
+            var img1=`<img src=${arr1[i]}>`; <!--백틱사용해서출력해보기-->
+            document.write(img1);
+        }
+
+
+    </script>
+    <br><br>
+    <h3>배열_new Array로 지정</h3>
+    <script>
+        var arr2 = new Array(5);
+
+        arr2[0] = "../Food/1.jpg";
+        arr2[1] = "../Food/2.jpg";
+        arr2[2] = "../Food/3.jpg";
+        arr2[3] = "../Food/4.jpg";
+        arr2[4] = "../Food/5.jpg";
+
+        var s = "배열 갯수" + arr2.length + "<br>";
+
+        for (var i = 0; i < arr2.length; i++) {
+           // s += "<img src='" + arr2[i] + "'>";
+            //` 백틱 사용하면
+            s +=`<img src=${arr2[i]}>`; 
+        }
+        document.write(s);        
+
+
+        //Food 폴더의 이미지 5개 0~4까지 지정하시고 출력
+       // for (var i = 0; i <arr2.length; i++) {
+          //  var img2 = "<img src='"+arr2[i]+"'>";
+           // document.write(img2);
+       // }
+        
+    </script>
+    <br><br>
+    <h3>배열_new Array로 지정..push로 초기화</h3>
+    <script>
+        var arr3 = new Array();
+
+        arr3.push(1);
+        arr3.push(3);
+        arr3.push(11);
+        arr3.push(6);
+        arr3.push(12);
+        arr3.push(17);
+
+        var s= "배열갯수: "+arr3.length+"<br>";
+
+        for(var i=0; i<arr3.length; i++){                            
+          //  document.write("<img src='../연예인사진/"+arr3[i]+".jpg'>");      
+            document.write(`<img src=../연예인사진/${arr3[i]}.jpg>`);      
+        }
+        document.write(s);
+        
+    </script>
+    
+    <br><br>
+    <h3>배열_new Array로 지정..pop으로 2개 삭제후 출력</h3>
+    <script>
+        var arr4 = new Array();        
+        
+        arr4.push("../연예인사진/1.jpg");
+        arr4.push("../연예인사진/2.jpg");
+        arr4.push("../연예인사진/3.jpg");
+        arr4.push("../연예인사진/4.jpg");
+        arr4.push("../연예인사진/5.jpg");
+        arr4.push("../연예인사진/6.jpg");
+
+        arr4.pop();
+        arr4.pop();
+        
+        //배열갯수 구하기
+        //var s="배열갯수: "+arr4.length+"<br>";
+
+        for(var i=0; i<arr4.length; i++){
+        //var s="<img src='"+arr4[i]+"'>";
+        var s=`<img src=${arr4[i]}>`
+            document.write(s);
+
+        }
+        
+
+
+    </script>
+
+</body>
+
+</html>

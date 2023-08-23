@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tb1 {
+            width: 400px;
+            border: 3px solid gray;
+            border-collapse: collapse;
+        }
+
+        .tb1 td,
+        .tb1 th {
+            border: 1px solid gray;
+        }
+
+        .tb1 tr th {
+            background-color: aqua;
+        }
+
+        .tb1 tr td:hover {
+            background-color: blueviolet;
+            color: white;
+        }
+
+        .tb2 {
+            width: 400px;
+            height: 200px;
+            border: 3px solid gray;
+            border-collapse: collapse;
+        }
+
+        .tb2 td {
+            border: 1px solid gray;
+        }
+
+        .tb3 {
+            width: 600px;
+            height: 600px;
+            border: 3px solid gray;
+            border-collapse: collapse;
+        }
+
+        .tb3 td,
+        .tb3 th {
+            border: 1px solid gray
+        }
+    </style>
+
+</head>
+
+<body>
+    <table border="1" style="width: 300px;">
+        <caption><b>[표 1]</b></caption>
+        <tr height="50" bgcolor="orange">
+            <td align="center">하나</td>
+            <td align="right" valign="top">둘</td>
+            <td valign="bottom" bgcolor="gray">삼</td>
+        </tr>
+        <tr height="50" align="center">
+            <td colspan="3">세칸합침!!</td>
+
+        </tr>
+    </table>
+
+    <hr>
+
+    <table class="tb1">
+        <caption><b>[표 2]</b></caption>
+        <tr>
+            <td align="center">사진</td>
+            <td align="center">이름</td>
+            <td align="center">핸드폰</td>
+            <th>주소</th>
+        </tr>
+        <tr>
+            <td rowspan="4">
+                <img src="../flower_ani/f14.png">
+            </td>
+            <td>성심당</td>
+            <td>010-1234-5678</td>
+            <td>대전시</td>
+        </tr>
+        <tr>
+            <td>성심당나라</td>
+            <td>010-1234-5678</td>
+            <td>충청시</td>
+        </tr>
+        <tr>
+            <td>성심한당</td>
+            <td>010-1234-5678</td>
+            <td>노잼시</td>
+        </tr>
+        <tr>
+            <td>성실하당</td>
+            <td>010-1234-5678</td>
+            <td>제빵시</td>
+        </tr>
+    </table>
+
+    <hr>
+
+    <table class="tb2">
+        <caption><b>[표문제_span]</b></caption>
+        <tr>
+            <td rowspan="2" align="center">1</td>
+            <td colspan="2" align="center">2</td>
+            <td align="center">3</td>
+        </tr>
+        <tr>
+            <td colspan="3" align="center">4</td>
+        </tr>
+        <tr>
+            <td align="center">5</td>
+            <td align="center">6</td>
+            <td align="center">7</td>
+            <td align="center">8</td>
+        </tr>
+    </table>
+
+
+    <hr>
+
+    <table class="tb3">
+        <caption><b>[표 문제]</b></caption>
+        <tr>
+            <th align="center">이름</th>
+            <th align="center">사진</th>
+            <th align="center">신상정보</th>
+        </tr>
+        <tr>
+            <td rowspan="5" align="center">아이유</td>
+            <td rowspan="5"><img src="../img/iu1.jpg" height="600px" width="435px"></td>
+            <td>인스타그램</td>
+        </tr>
+        <tr>
+            <td>출생19930516</td>
+        </tr>
+        <tr>
+            <td>소속사EDAM</td>
+        </tr>
+        <tr>
+            <td>데뷔2008년도</td>
+        </tr>
+        <tr>
+            <td>유튜브</td>
+        </tr>
+
+    </table>
+
+</body>
+
+</html>

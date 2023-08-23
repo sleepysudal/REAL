@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/btnstyle.css">
+</head>
+<style>
+    #result {
+        position: absolute;
+        left: 10px;
+        top: 150px;
+        width: 400px;
+        height: 400px;
+        border: 5px solid rgb(205, 16, 16);
+        background-color: blanchedalmond;
+        padding: 20px;
+    }
+    #result img{
+        max-width: 350px;
+        max-height: 350px;       
+    }
+
+    
+</style>
+<script>
+    window.onload = function () {
+        //버튼값 요소 추가
+        var btn1 = document.getElementById("btn1");
+        var btn2 = document.getElementById("btn2");
+        var food = "<img src=../Food/5.jpg>";
+        var person = "<img src=../연예인사진/15.jpg>";
+        var r= document.getElementById("result");
+        
+        var imgArr=new Array();
+        imgArr.push("../Food/1.jpg");
+        imgArr.push("../Food/2.jpg");
+        imgArr.push("../Food/3.jpg");
+        imgArr.push("../Food/4.jpg");
+        imgArr.push("../Food/5.jpg");
+
+        //버튼 눌럿을시 반응
+        btn1.onclick = function () {
+
+            var a = confirm("음식을 출력할까요?");
+
+            //(food 버튼 눌럿을때  div에 음식사진 출력)            
+            if (a) {
+                result.innerHTML = food;
+            }
+            else{
+                result.innerHTML="취소를 선택하셨습니다";
+            }
+        }
+
+        btn2.onclick = function () {
+
+            var b = confirm("연예인사진을 출력할까요?");
+
+            //연예인 사진 눌럿을때 div에 연예인사진출력
+            if (b) {
+                result.innerHTML = person;
+            }
+            else{
+                alert("취소했습니다");
+            }
+        }
+        btn3.onclick=function(){
+
+            var c =prompt("출력할 이미지의 인덱스 번호를 입력해주세요");
+
+            if(c<0 || c>4){
+                r.innerHTML="해당번호는 없습니다";
+            }else{
+               r.innerHTML=`<img src=${imgArr[c]}>`;
+            }
+
+            //없다고할때는 !num 쓰면됨 null 아님
+            
+        }
+
+    }
+</script>
+
+<body>
+    <!--
+    문제1 
+    버튼 2개에 하나는 food, 하나는 연예인 이라고 쓰고 
+    css 는 우리가 만든 btnstyle에서 적용한다
+    food 버튼을 클릭하면 음식사진을 div에 출력하고 연예인을
+    클릭하면 연예인 한명을 출력한다     
+    (단,2번 모두 음식을 출력할까요? 라고 물어보고 예를 클릭시에만 이미지를 출력한다)-->
+
+
+    <!--
+        문제2
+        이미지 출력이라는 버튼을 만들고 클릭시
+        prompt로 "출력할 이미지의 인덱스 번호를 입력해주세요" 라고 출력후
+        0번을 입력하면 0번이미지 출력(총 5개의 이미지를 imgArr 이라는 배열형태로
+        넣어놓고 다양한 폴더의 이미지 5개 배열에 넣어주세요
+        단 배열 인덱스에 없는 값 입력시 div에 "해당번호는 없습니다"라고 출력
+    -->
+
+
+    <button type="button" id="btn1" class="btn btn-gold">food</button>
+    <button type="button" id="btn2" class="btn btn-pink">연예인</button>
+    <button type="button" id="btn3" class= "btn btn-black">이미지출력</button>
+    <hr>
+    <div id="result"></div>
+
+
+</body>
+
+</html>

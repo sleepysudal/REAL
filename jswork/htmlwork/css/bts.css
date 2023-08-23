@@ -1,0 +1,24 @@
+#bts {
+    text-align: center;
+    background-color: blue;
+    font-size: 22px;
+    color: red;
+    border: 2px solid gray;
+    margin-top: 20px;
+    border-radius: 30px;
+    width: 300px;
+    height: 150px;
+    line-height: 150px;
+}
+
+#result {
+    width: 300px;
+    height: 150px;
+    line-height: 150px;
+    font-size: 22px;
+    text-align: center;
+    border: 2px solid gray;
+    margin-top: 20px;
+    border-radius: 30px;
+    background-color: skyblue;
+}

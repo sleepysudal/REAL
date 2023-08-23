@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Dongle:wght@300;400&family=Gugi&family=Pangolin&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+    <style>
+        .tb1 {
+            width: 400px;
+            border: 5px inset gray;
+            border-collapse: collapse;
+        }
+
+        .tb1 td {
+            border: 1px solid gray;
+            font-family: 'Gugi';
+            font-size: 25px;
+        }
+        .tb1 .line{
+            border-bottom: 5px double red;
+        }
+    </style>
+</head>
+
+<body>
+    <table class="tb1">
+        <caption><b>[표 span 연습]</b></caption>
+        <tr>           
+            <td rowspan="3" align="center" >
+                <img src="../img/iu1.jpg" width="130"  
+                border="1">
+            </td>            
+            <td>이름:이지은</td>
+        </tr>
+        <tr>
+            <td>핸드폰:010-1234-5678</td>
+        </tr>
+        <tr class="line">
+            <td>주소:대한민국</td>
+        </tr>
+        
+            <tr>           
+                <td rowspan="3" align="center" >
+                    <img src="../img/minzi1.jpg" width="130"  
+                    border="1">
+                </td>            
+                <td>이름:김민지</td>
+            </tr>
+            <tr>
+                <td>핸드폰:010-1234-5678</td>
+            </tr>
+            <tr>
+                <td>주소:대한민국</td>
+            </tr>
+        
+    </table>
+</body>
+
+</html>

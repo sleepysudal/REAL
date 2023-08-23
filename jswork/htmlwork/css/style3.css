@@ -1,0 +1,32 @@
+div.box1 {
+
+    background-color: pink;
+
+    font-size: 30px;
+    font-family: 'Gugi';
+    color: slateblue;
+    margin-left: 50px;
+    float: left;
+    line-height: 50px;
+    width: 600px;
+    text-align: center;
+    text-decoration: underline;
+    border: 10px groove gray;
+    text-shadow: 10px 20px 30px gold;
+
+}
+
+div>ul>li {
+    list-style: none;
+}
+
+
+#box1 p {
+    text-align: center;
+}
+
+#box1 ul li {
+    list-style: none;
+    /*리스트에 앞에 문자없애기*/
+    padding-left: 200px;
+}

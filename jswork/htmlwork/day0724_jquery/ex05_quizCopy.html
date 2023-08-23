@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h3>Q.세개의 이미지에 마우스를 올리면 cheese1.png로 바뀌며 
+        마우스가 벗어나면 원래 이미지로 돌아가게해라
+    </h3>
+    <img src="../html_img/1.png" width="150">
+    <img src="../html_img/2.png" width="150">
+    <img src="../html_img/3.png" width="150">
+
+    <script>
+       
+       //1번이미지        
+        $("img:eq(0)").mouseover(function(){                      
+            $("img:eq(0)").attr("src","../html_img/cheese1.png" );            
+        });
+        $("img:eq(0)").mouseout(function(){           
+           $("img:eq(0)").attr("src","../html_img/1.png");
+        });
+        
+        
+        //2번이미지
+        $("img:eq(1)").mouseover(function(){           
+            $("img:eq(1)").attr("src","../html_img/cheese1.png" );            
+        });
+        $("img:eq(1)").mouseout(function(){          
+           $("img:eq(1)").attr("src","../html_img/2.png");
+        });
+
+        //3번이미지
+        $("img:eq(2)").mouseover(function(){            
+            $("img:eq(2)").attr("src","../html_img/cheese1.png" );            
+        });
+        $("img:eq(2)").mouseout(function(){           
+           $("img:eq(2)").attr("src","../html_img/3.png");
+        });
+        
+
+        /* 선생님 답안
+        $("img").mouseover(function(){
+        imgsrc=$(this).attr("src"); //기존이미지로 돌아가기 위해 저장
+        $(this).attr("src","../flower_ani/f20.png");
+        });
+
+        $("img").mouseout(function(){
+            $(this).attr("src", imgsrc);
+        });
+        */
+    </script>
+
+
+</body>
+</html>

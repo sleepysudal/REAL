@@ -11,6 +11,8 @@
 <% 
 //절대경로 잡기 
 String root = request.getContextPath();
+
+
 %>
 	<link rel="stylesheet" type="text/css" href="<%=root %>/menu/css/font-awesome.css">
 	<link rel="stylesheet" type="text/css" href="<%=root %>/menu/css/menu.css">
@@ -33,9 +35,30 @@ String root = request.getContextPath();
 					<li class="parent">
 						<a href="#">about 회원</a>
 						<ul class="sub-menu">
-							<li><a href="<%=root%>/index.jsp?main=login/loginmain.jsp"><i class="bi bi-door-open-fill"></i> 로그인</a></li>
+						<% 
+								String loginok=(String)session.getAttribute("loginok");
+								if(loginok!="yes")
+								{%>
+								<li><a href="<%=root%>/index.jsp?main=login/loginmain.jsp"><i class="bi bi-door-open-fill"></i> 로그인</a></li>
+								<%} else{%>
+								<li><a href="<%=root%>/index.jsp?main=login/loginmain.jsp"><i class="bi bi-door-open-fill"></i> 로그아웃</a></li>
+								<% } 
+								%>
 							<li><a href="<%=root%>/index.jsp?main=member/memberform.jsp"><i class="bi bi-person-plus-fill"></i>회원가입</a></li>
-							<li><a href="<%=root%>/index.jsp?main=member/memberlist.jsp"><i class="bi bi-person-lines-fill"></i> 회원목록</a></li>
+							
+							<%
+							//id 값 받아오는데 session 의 형이 다르기때문에 string 으로 형변환 해줌
+							String myid=(String)session.getAttribute("myid");	
+							if(myid.equals("admin")&&session.getAttribute("loginok")!=null)
+							{%>
+									<li><a href="<%=root%>/index.jsp?main=member/memberList.jsp"><i class="icon-gift"></i> 회원목록</a></li>
+							<%}
+							%>
+							<% 
+							if(loginok=="yes"){ %>
+							<li><a href="<%=root%>/index.jsp?main=member/myinfo.jsp"><i class="bi bi-person-lines-fill"></i> 나의정보</a></li>
+							<%}%> 
+								
 							
 							
 						</ul>

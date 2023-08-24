@@ -79,17 +79,23 @@
        .block{
        display: block;
        }
-
+       .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after{
+       display: none;
+       }
     </style>
 </head>
 <body>
   <!-- Swiper -->
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="image/banner0.jpeg"><h1 class="block">1번 장순영</h1></div>
-        <div class="swiper-slide"><img src="image/banner1.jpeg"><h1 class="block">2번 장순영</h1></div>
-        <div class="swiper-slide"><img src="image/banner3.png"><h1 class="block">3번 장순영</h1></div>
-        <div class="swiper-slide"><img src="image/canada1.jpeg"><h1 class="block">4번 장순영</h1></div>
+        <div class="swiper-slide">1등<img src="image/poster1.jpeg"><h3 class="block">백두산</h3>
+        <h6>좋아요 99%&nbsp;예매율56%</h6></div>
+        <div class="swiper-slide">2등<img src="image/poster2.jpeg"><h3 class="block">엘리멘탈</h3>
+        <h6>좋아요 92%&nbsp;예매율50%</h6></div>
+        <div class="swiper-slide">3등<img src="image/poster3.jpeg"><h3 class="block">오펜하이머</h3>
+        <h6>좋아요88%&nbsp;예매율49%</h6></div>
+        <div class="swiper-slide">4등<img src="image/poster4.jpeg"><h3 class="block">바비</h3>
+        <h6>좋아요86%&nbsp;예매율48%</h6></div>
       </div>
       <div class="swiper-button-next"><img src="image/rightarrow.png" style="width:100px; height:100px;"></div>
       <div class="swiper-button-prev"><img src="image/leftarrow.png" style="width:100px; height:100px;"></div>

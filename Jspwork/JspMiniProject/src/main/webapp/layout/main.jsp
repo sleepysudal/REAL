@@ -1,35 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Black+And+White+Picture&family=Cute+Font&family=Diphylleia&family=Dongle:wght@300&family=Hi+Melody&family=Nanum+Brush+Script&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="utf-8">
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Dongle&family=Gaegu:wght@700&family=Nanum+Pen+Script&family=Single+Day&display=swap" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <title>Insert title here</title>
-<style>
-div.imgs img{
-padding: 20px;
-width:900px;
-height:600px;
-
-}
-#img1{
-position:absolute;
-top:100px;
-left:200px;
-}
-
-</style>
-
-
-
 </head>
 <body>
-	<div class="imgs">
-	<img alt="" src="image/penguin.gif" id="img1" >
+	<!-- <img src="image/mainimg.jpg" width="1200" height="1000"> -->
 	
-	</div>
+	<iframe width="1200" height="600" src="https://www.youtube.com/embed/v-2fZJaR250?si=hGpZbc6bK8AuXJZp?mute=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </body>
 </html>

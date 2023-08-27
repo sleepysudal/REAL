@@ -21,18 +21,16 @@ margin-left:40px;
 </head>
 <%
 //절대경로잡기 /실행 시 프로젝트명 나오면 되고, 필요한곳에 복붙해서 사용하면 됌
-
 String root=request.getContextPath();
-
+//아이디 얻기
 String myid=(String)session.getAttribute("myid");
+
+//로그인상태 얻기
 String loginok=(String)session.getAttribute("loginok");
 
-
+//dao 에서 이름 얻기
 MemberDao dao=new MemberDao();
 String name=dao.getName(myid);
-
-
-
 %>
 
 <body>
@@ -40,6 +38,7 @@ String name=dao.getName(myid);
 펭귄</a>
 <span class="loginout">
 <%
+//loginok.equals("yes")
 if(loginok!=null){%>
 	<b><%=name %></b>님이 접속중입니다.<button type="button" class="btn btn-danger" onclick="location.href='login/logoutaction.jsp'">로그아웃</button>
 	

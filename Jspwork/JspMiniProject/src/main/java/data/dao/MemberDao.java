@@ -131,7 +131,7 @@ public class MemberDao {
 
 		return list;
 	}
-
+//delete
 	public void deleteMember(String num) {
 		Connection conn = db.getConnection();
 		PreparedStatement pstmt = null;

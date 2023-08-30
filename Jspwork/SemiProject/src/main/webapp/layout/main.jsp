@@ -49,6 +49,7 @@
 
 
 
+
 .swiper-button-next {
 	opacity: 0.1; /*투명도 조절 */
 }
@@ -107,10 +108,7 @@ right: 200px;
 }
 
 
-<!--처음 가져오면 기본 버튼 없애줌 -->
-div.swiper-button-prev.swiper-button-disabled::after{
-display:none;
-}
+
 
 
 </style>
@@ -129,7 +127,7 @@ display:none;
  <!-- <video autoplay muted>
     <source src="../image/opvideo.mp4" type="video/mp4">
     </video> -->
-    <iframe width="100%" height="500" src="https://www.youtube.com/embed/oSqK_v6zPoM?si=pbSGt6BChzah6rTR?mute=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="100%" height="500" src="https://www.youtube.com/embed/oSqK_v6zPoM?mute=1&autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   
 </div>
 	
@@ -167,10 +165,10 @@ display:none;
 				
 			</div>
 			<div class="swiper-button-next">
-				<img src="../image/rightarrow.png" style="width: 100px; height: 100px;">
+				 <img src="../image/rightarrow.png" style="width: 100px; height: 100px;"> 
 			</div>
-			<div class="swiper-button-prev">
-				<img src="../image/leftarrow.png" style="width: 100px; height: 100px;">
+			<div class="swiper-button-prev" >
+				  <img src="../image/leftarrow.png" style="width: 100px; height: 100px;">
 			</div>
 			
 		</div>
@@ -181,11 +179,11 @@ display:none;
 
 <!-- 이벤트 -->
 <div class="event">
-<h1>이벤트</h1>
-<button type="button" id="btnall2" class="btn btn-outline-danger">전체보기</button>
-<div class="eventimage">
-<img src="../image/movie3.jpeg" id="eventimage1" style="width: 200px; height: 300px;">
-<h3>오펜하이머 상영회</h3>
+	<h1>이벤트</h1>
+	<button type="button" id="btnall2" class="btn btn-outline-danger">전체보기</button>	
+	<div class="eventimage">
+	<img src="../image/movie3.jpeg" id="eventimage1" style="width: 200px; height: 300px;">
+	<h3>오펜하이머 상영회</h3>
 <h6 style="color: gray">2023-08-26</h6>
 <img src="../image/movie3.jpeg" id="eventimage2" style="width: 200px; height: 300px;">
 <h3>오펜하이머 n차 관람</h3>

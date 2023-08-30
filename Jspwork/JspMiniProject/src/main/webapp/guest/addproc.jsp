@@ -51,7 +51,7 @@
 		response.sendRedirect("../index.jsp?main=guest/guestlist.jsp");
 		
 	}catch(Exception e){
-		
+		e.getMessage();
 	}
 %>
 </body>

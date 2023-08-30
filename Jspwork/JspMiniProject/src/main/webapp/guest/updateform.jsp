@@ -50,6 +50,7 @@
 	String num = request.getParameter("num");
 	String currentPage = request.getParameter("currentPage");
 	
+	
 	GuestDao dao = new GuestDao();
 	GuestDto dto = dao.getData(num);
 %>

@@ -177,18 +177,38 @@ right: 200px;
 </div>
 </div>
 
+<br>
+
 <!-- 이벤트 -->
-<div class="event">
-	<h1>이벤트</h1>
-	<button type="button" id="btnall2" class="btn btn-outline-danger">전체보기</button>	
-	<div class="eventimage">
-	<img src="../image/movie3.jpeg" id="eventimage1" style="width: 200px; height: 300px;">
-	<h3>오펜하이머 상영회</h3>
-<h6 style="color: gray">2023-08-26</h6>
-<img src="../image/movie3.jpeg" id="eventimage2" style="width: 200px; height: 300px;">
-<h3>오펜하이머 n차 관람</h3>
-<h6 style="color: gray">2023-08-01~2023-10-31</h6>
-</div>
+<div class="event" style="margin-left:50px;">
+    <h1>이벤트</h1>
+    <button type="button" id="btnall2" class="btn btn-outline-danger" style="float: right">전체보기</button>
+    <div class="eventimage" style="display: flex; flex-direction: row;">
+        
+        <div style="margin-right: 100px;">
+            <img src="../image/movie3.jpeg" id="eventimage1" style="width: 200px; height: 300px;">
+            <h3>오펜하이머 상영회</h3>
+            <h6 style="color: gray">2023-08-26~2023-08-31</h6>
+        </div>
+        
+        <div style="margin-right:100px;">
+            <img src="../image/event1.jpg" id="eventimage2" style="width: 200px; height: 300px;">
+            <h3>오펜하이머 n차 관람</h3>
+            <h6 style="color: gray">2023-08-01~2023-10-31</h6>
+        </div>
+        
+        <div style="margin-right:100px;">
+            <img src="../image/cos1.png" id="eventimage3" style="width: 200px; height: 300px;">
+            <h3>오펜하이머 코스프레</h3>
+            <h6 style="color: gray">2023-08-01~2023-10-31</h6>
+        </div>
+        
+        <div>
+        	<img src="../image/nuclear.jpg" id="eventimage4" style="width: 200px; height: 300px;">
+            <h3>버섯특선 요리시식회</h3>
+            <h6 style="color: gray">2023-08-31</h6>
+        </div>
+    </div>
 </div>
 
 	<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>

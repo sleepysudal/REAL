@@ -56,14 +56,22 @@ span.day{color:gray; font-size:0.8pt;}
 				onclick="location.href='index.jsp?main=board/smartform.jsp'">글쓰기</button>
 				<button type="button" class="btn btn-outline-success"
 				onclick="location.href='index.jsp?main=board/boardlist.jsp?currentPage=<%=currentPage%>'">목록</button>
-				<button type="button" class="btn btn-outline-success"
-				onclick="location.href='index.jsp?main=board/updateform.jsp?num=<%=num%>&currentPage=<%=currentPage%>'">수정</button>
-				<button type="button" class="btn btn-outline-success"
-				onclick="location.href='index.jsp?main=board/delete.jsp'">삭제</button>
+				<button type="button" class="btn btn-outline-success" 
+            	onclick="location.href='index.jsp?main=board/updateform.jsp?num=<%=num%>&currentPage=<%=currentPage%>'">수정</button>
+				<button type="button" class="btn btn-outline-success" onclick="funcdel(<%=num%>,<%=currentPage%>)">삭제</button>
 				</td>
 			</tr>
 		</table>
 	</div>
+	<script type="text/javascript">
+	function  funcdel(num,currentPage){
+		//alert(num+","+currentPage);
+		var a= confirm("삭제하려면 확인을 눌러주세요")
+		if(a){
+			location.href="board/deleteaction.jsp?num="+num+"&currentPage="+currentPage;
+		}
+	}
+	</script>
 
 </body>
 </html>

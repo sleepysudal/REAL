@@ -27,14 +27,12 @@
 		<jsp:include page="layout/header.jsp"/>
 	</div>
 	
-	<!--
-	<div class="layout menu">
-		<jsp:include page="layout/menu.jsp"/>
-	</div>
-	-->
-	
 	<div class="layout main">
 		<jsp:include page="layout/main.jsp"/>
+	</div>
+	
+	<div class="layout footer">
+		<jsp:include page="layout/footer.jsp"/>
 	</div>
 </body>
 </html>

@@ -57,7 +57,7 @@ SmartDto dto = dao.getData(num);
 			<td colspan="2" align="center">
 				<button type="button" class="btn btn-warning"
 					style="width: 120px;"
-					onclick="submitContents(this)">DB저장</button>
+					onclick="submitContents(this)">DB수정</button>
 				
 				<button type="button" class="btn btn-warning"
 					style="width: 120px;"

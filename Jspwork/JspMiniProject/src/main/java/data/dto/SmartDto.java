@@ -10,8 +10,16 @@ private String content;
 private int readcount;
 private Timestamp writeday;
 
+private int answercount; //댓글 갯수 지정
+
 public String getNum() {
 	return num;
+}
+public int getAnswercount() {
+	return answercount;
+}
+public void setAnswercount(int answercount) {
+	this.answercount = answercount;
 }
 public void setNum(String num) {
 	this.num = num;

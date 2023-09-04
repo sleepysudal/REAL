@@ -108,7 +108,30 @@ String myid = (String) session.getAttribute("myid");
 
 
 						<li><a href="<%=root%>/index.jsp?main=road/map.jsp">찾아오시는 길</a></li>
+						
+						<li class="parent">
+						<a href="#">쇼핑몰</a>
+							<ul class="sub-menu">
 
+								<%
+								if (myid!=null && myid.equals("admin") && loginok != null) {
+								%>
+								<li><a
+									href="<%=root%>/index.jsp?main=shop/addform.jsp"><i
+										class="icon-gift"></i> 상품등록</a></li>
+								<%
+								}
+								%>
+
+								<%
+								if (loginok != null) {
+								%>
+								<li><a href="<%=root%>/index.jsp?main=shop/shoplist.jsp"><i
+										class="icon-gift"></i> 상품목록</a></li>
+								<%
+								}
+								%>
+							</ul></li>
 					</ul>
 				</nav>
 				<div class="clear"></div>

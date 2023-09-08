@@ -44,7 +44,7 @@
 	dto.setPrice(price);
 	
 	//db에 추가
-	dao.insertshop(dto);
+	dao.insertShop(dto);
 	
 	//상품등록으로 이동
 	response.sendRedirect("../index.jsp?main=shop/addform.jsp");

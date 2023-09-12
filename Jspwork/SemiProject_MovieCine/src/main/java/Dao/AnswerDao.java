@@ -149,11 +149,10 @@ import mysql.db.DBConnect;
 	   }
 	   
 	   
-	 //수정시 모달창에서 전에작성한 내용가져옴
-	   public String getContent(String idx)
+	 //수정시 모달창에서 전에작성한 내용가져옴 -dto에 리스트해서두개 받아라 ?
+	   public AnswerDto getContent(String idx)
 	   {
-	      String content="";
-	      String star="";
+		   AnswerDto dto=new AnswerDto();
 	      
 	      Connection conn=db.getConnection();
 	      PreparedStatement pstmt=null;
@@ -168,8 +167,8 @@ import mysql.db.DBConnect;
 	         
 	         if(rs.next())
 	         {
-	            content=rs.getString("content");
-	            star = rs.getString("star");
+	            dto.setContent(rs.getString("content"));
+	            dto.setStar(rs.getString("star"));
 	         }
 	      } catch (SQLException e) {
 	         // TODO Auto-generated catch block
@@ -177,7 +176,8 @@ import mysql.db.DBConnect;
 	      } finally {
 	         db.dbClose(rs, pstmt, conn);
 	      }
-	      return content;
+	      return dto;
+	      
 	   }
 	   
 	   
@@ -217,6 +217,7 @@ import mysql.db.DBConnect;
 	      try {
 	         pstmt=conn.prepareStatement(sql);
 	         pstmt.setString(1, idx);
+	         
 	         pstmt.execute();
 	         
 	      } catch (SQLException e) {

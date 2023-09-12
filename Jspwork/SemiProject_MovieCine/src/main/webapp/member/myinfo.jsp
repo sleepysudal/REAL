@@ -17,7 +17,7 @@
 String num=request.getParameter("num");
 String id=request.getParameter("id");
 MemberDao dao=new MemberDao();
-MemberDto dto=dao.getDataId(id);
+MemberDto dto=dao.getData(num);
 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 %>
 <body>

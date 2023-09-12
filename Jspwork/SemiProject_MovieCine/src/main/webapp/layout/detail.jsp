@@ -12,9 +12,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
 <title>detail</title>
 <%
 //절대경로잡기
@@ -147,6 +152,10 @@ b{
 i.penguin{
 font-size: 23pt;
 }
+#starimage{
+width: 30px;
+height: 30px;
+}
 
 
 </style>
@@ -161,8 +170,9 @@ String mv_opendate = request.getParameter("mv_opendate");
 
 
 //answer 테이블 
-String idx = request.getParameter("idx"); //시퀀스
+
 //String num = (String)session.getAttribute("num");// num-answer 
+String idx = request.getParameter("idx");
 String num = request.getParameter("mv_no"); //member-mvno
 String content = request.getParameter("content");//댓글 내용
 String star = request.getParameter("star"); //별점
@@ -191,11 +201,12 @@ MemberDto mdto = mdao.getData(num); //mem_id 가져오기
 	function back() {
 		history.back();
 	}
-	//댓글 추가 버튼
+	
 	$(function(){
-		
+		//처음에 리스트 호출
 		list();
 		
+		//댓글 추가 
 		$("#btnadd").click(function(){
 		var content=$("#content").val();
 		var star=$("#star").val();
@@ -218,48 +229,137 @@ MemberDto mdto = mdao.getData(num); //mem_id 가져오기
 			}
 		})
 	})
+	// 댓글 삭제 - sweetalert 쓸거
+	$(document).on("click", ".btndel", function() {
+	    var idx = $(this).data("idx");
+
+	   
+	    Swal.fire({
+	        title: "댓글 삭제",  
+	        text: "이 댓글을 삭제하시겠습니까?",  
+	        icon: "question",  
+	        showCancelButton: true,  
+	        confirmButtonColor: "#3085d6",  
+	        cancelButtonColor: "#d33",  
+	        confirmButtonText: "삭제",  
+	        cancelButtonText: "취소"  
+	    }).then((result) => {  
+	        if (result.isConfirmed) {  
+	            
+	            $.ajax({
+	                type: "get",
+	                dataType: "html",
+	                url: "answer/deleteanswer.jsp",
+	                data: { "idx": idx },  
+	                success: function() {
+	                    
+	                    list();
+	                }
+	            });
+	        }
+	    });
+	});
+
+		//댓글 수정 - modal 쓸거
+		$(document).on("click", ".btnup", function() {
+		    var idx = $(this).data("idx");
+		    
+		    // 해당 댓글의 내용과 별점을 가져옵니다.
+		    var content = $(this).data("content");
+		    var star = $(this).data("star");
+		    
+		    // 모달 창을 띄우고 내용을 채웁니다.
+		    $("#updateContent").val(content);
+		    $("#updateStar").val(star);
+		    
+		    // 모달을 띄웁니다.
+		    $("#updateModal").modal("show");
+		    
+		    // 모달 내부에서 저장 버튼을 클릭할 때의 이벤트를 정의합니다.
+		    $("#updateSaveBtn").click(function() {
+		        // 수정한 내용을 가져옵니다.
+		        var updatedContent = $("#updateContent").val();
+		        var updatedStar = $("#updateStar").val();
+		        
+		        // 서버로 수정 내용을 전송합니다.
+		        $.ajax({
+		            type: "post",
+		            dataType: "html",
+		            url: "updateanswer.jsp",
+		            data: { "idx": idx, "content": updatedContent, "star": updatedStar },
+		            success: function() {
+		                // 수정 후 모달을 닫고 댓글 목록을 업데이트합니다.
+		                $("#updateModal").modal("hide");
+		                list();
+		            }
+		        });
+		    });
+		});
+
+
+		
 })
-//댓글리스트
-function list(){
-		$.ajax({
-			type:"get",
-			url:"answer/listboard.jsp",
-			data: {"num":<%=num%>}, // num을 서버로 전송
-			dataType:"json",
-			success: function(data){
-				//alert(data.length);
-				var s = "<table class='table table-bordered' style='width:1030px;'>";
-				s+="<caption align='top'><b>댓글목록</b></caption>";
-				s+="<tr>";
-				s+="<th>번호</th>"
-				s+="<th>작성자</th>";
-				s+="<th>별점</th>";
-				s+="<th>내용</th>";
-				s+="<th>작성일</th>";
-				s+="</tr>";
-				
-				if(data.length==0){
-					s+="<tr>";
-					s+="<td colspan='4' align='center'>";
-					s+="<b>저장된 글이 없습니다</b>";
-					s+="</td></tr>";
-				}else{
-					$.each(data, function(i,item){
-						s+="<tr>";
-						s+="<td align='center'>" + (i+1)+"</td>";
-						s+="<td>" + item.myid+ "</td>";
-						s+="<td>"+item.star+ "</td>";
-						s+="<td>"+item.content+"</td>";
-						s+="<td>"+item.writeday+"</td>";
-						s+="</tr>";
-					})
-				}
-				s+="</table>";
-				$(".detailresult").html(s);
-				
-			}
-		})
-	}
+
+//댓글 리스트
+function list() {
+    $.ajax({
+        type: "get",
+        url: "answer/listboard.jsp",
+        data: {"num": <%=num%>, "idx":<%=idx%>}, 
+        dataType: "json",
+        success: function (data) {
+            var s = "<table class='table table-bordered' style='width:1030px;'>";
+            s += "<caption align='top'><b>댓글목록</b></caption>";
+            s += "<tr>";
+            s += "<th>번호</th>"
+            s += "<th>작성자</th>";
+            s += "<th>별점</th>";
+            s += "<th>내용</th>";
+            s += "<th>작성일</th>";
+            s += "<th>삭제</th>";
+            s += "<th>수정</th>";
+            s += "</tr>";
+
+            if (data.length == 0) {
+                s += "<tr>";
+                s += "<td colspan='4' align='center'>";
+                s += "<b>저장된 글이 없습니다</b>";
+                s += "</td></tr>";
+            } else {
+                $.each(data, function (i, item) {
+                    s += "<tr>";
+                    s += "<td align='center'>" + (i + 1) + "</td>";
+                    s += "<td>" + item.myid + "</td>";
+                    s += "<td>";
+                    
+                    var starimage = "";
+                   
+                    if (item.star == "1") {
+                        starimage = "<img src='image/angry.png' id='starimage' alt='1 Star'>";
+                    } else if (item.star == "2") {
+                        starimage = "<img src='image/sad.png' id='starimage'alt='2 Star'>";
+                    } else if (item.star == "3") {
+                        starimage = "<img src='image/laughing.png'id='starimage' alt='3 Star'>";
+                    } else if (item.star == "4") {
+                        starimage = "<img src='image/smile.png' id='starimage' alt='4 Star'>";
+                    } else if (item.star == "5") {
+                        starimage = "<img src='image/love.png' id='starimage' alt='5 Star'>";
+                    }
+                    
+                    s += starimage; 
+                    s += "</td>";
+                    s += "<td>" + item.content + "</td>";
+                    s += "<td>" + item.writeday + "</td>";
+                    s +="<td><button type='button' class='btn btn-outline-danger btndel' data-idx='"+item.idx+"'>삭제</button></td>";
+                    s +="<td>" + "<button type='button' class='btn btn-outline-success btnup' data-idx='"+item.idx+"'>수정</button>"+"</td>";
+                    s += "</tr>";
+                })
+            }
+            s += "</table>";
+            $(".detailresult").html(s);
+        }
+    })
+}
 
 </script>
 </head>
@@ -282,6 +382,9 @@ function list(){
 		<div class="detailcomment">	
 		<form>
 			<input type="hidden" id="num" value="<%=num %>">
+			<input type="hidden" id="idx" value="<%=idx %>">
+			
+			
 			<table class="table table-bordered" style="width:600px; height: 250px;">
 			<caption align="top"><b>댓글 입력</b></caption>
 				<tr>
@@ -322,12 +425,53 @@ function list(){
 			</table>
 		</form>
 		</div>
-		<div class="detailresult"><b>댓글출력</b></div>
-			<table class="table table-bordered" style="width:1000px;">
-			<caption align="top"></caption>
-			</table>
+		
+		<div class="detailresult">
+			<b>댓글출력</b>
+			<div style="overflow: auto; height: 400px;">
+			
+			
+			
+			</div>
+			</div>
 	</div>
 </div>
+
+<!-- 모달 창 -->
+<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateModalLabel">댓글 수정</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 수정할 내용을 입력할 폼 -->
+                <form>
+                    <div class="mb-3">
+                        <label for="updateContent" class="form-label">댓글 내용</label>
+                        <textarea class="form-control" id="updateContent" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="updateStar" class="form-label">별점</label>
+                        <select class="form-select" id="updateStar">
+                            <option value="1">★</option>
+                            <option value="2">★★</option>
+                            <option value="3">★★★</option>
+                            <option value="4">★★★★</option>
+                            <option value="5">★★★★★</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-primary" id="updateSaveBtn">수정</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>

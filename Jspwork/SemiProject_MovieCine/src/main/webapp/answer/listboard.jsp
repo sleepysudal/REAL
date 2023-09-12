@@ -14,8 +14,9 @@
    MovieDto mdto=new MovieDto();
    AnswerDao dao=new AnswerDao();
    String num=request.getParameter("num");
+   
    List<AnswerDto> list=dao.getAllAnswers(num);
-   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
    JSONArray arr=new JSONArray();
    for(AnswerDto dto:list)
    {

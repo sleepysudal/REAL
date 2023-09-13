@@ -9,6 +9,8 @@
    
    
    AnswerDto dto =new AnswerDto();
+   
+   dto.setIdx(idx);
    dto.setContent(content);
    dto.setStar(star);
    

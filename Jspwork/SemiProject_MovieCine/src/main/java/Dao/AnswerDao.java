@@ -16,12 +16,12 @@ import mysql.db.DBConnect;
 	   DBConnect db=new DBConnect();
 	   
 	   //댓글 입력
-	   public void insertAnswer(AnswerDto dto)
+	   public void insertAnswer(AnswerDto dto,String now)
 	   {
 	      Connection conn=db.getConnection();
 	      PreparedStatement pstmt=null;
 	      
-	      String sql="insert into answer(num,myid,content,star,writeday) values(?,?,?,?,now())";
+	      String sql="insert into answer(num,myid,content,star,writeday) values(?,?,?,?,?)";
 	      
 	      try {
 	         pstmt=conn.prepareStatement(sql);
@@ -30,6 +30,7 @@ import mysql.db.DBConnect;
 	         pstmt.setString(2, dto.getMyid());
 	         pstmt.setString(3, dto.getContent());
 	         pstmt.setString(4, dto.getStar());
+	         pstmt.setString(5, now);
 	        
 	         pstmt.execute();
 	         
@@ -150,6 +151,7 @@ import mysql.db.DBConnect;
 	   
 	   
 	 //수정시 모달창에서 전에작성한 내용가져옴 -dto에 리스트해서두개 받아라 ?
+	   /*
 	   public AnswerDto getContent(String idx)
 	   {
 		   AnswerDto dto=new AnswerDto();
@@ -179,6 +181,7 @@ import mysql.db.DBConnect;
 	      return dto;
 	      
 	   }
+	   */
 	   
 	   
 	   //모달창의 수정버튼 누르면 수정되기

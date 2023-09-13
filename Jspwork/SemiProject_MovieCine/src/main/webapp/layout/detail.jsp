@@ -223,7 +223,7 @@ MemberDto mdto = mdao.getData(num); //mem_id 가져오기
 				//인서트 후 초기화
 				$("#content").val(" ");
 				$("#star").val(" ");
-				
+				//다시 리스트 호출
 				list();
 
 			}
@@ -262,38 +262,41 @@ MemberDto mdto = mdao.getData(num); //mem_id 가져오기
 
 		//댓글 수정 - modal 쓸거
 		$(document).on("click", ".btnup", function() {
-		    var idx = $(this).data("idx");
-		    
-		    // 해당 댓글의 내용과 별점을 가져옵니다.
+		    var idx = $(this).data("idx");  
 		    var content = $(this).data("content");
 		    var star = $(this).data("star");
 		    
-		    // 모달 창을 띄우고 내용을 채웁니다.
-		    $("#updateContent").val(content);
-		    $("#updateStar").val(star);
+		    $("#updatecontent").val(content);
+		    $("#updatestar").val(star);
 		    
-		    // 모달을 띄웁니다.
-		    $("#updateModal").modal("show");
+		    $("#updatemodal").modal("show");
 		    
-		    // 모달 내부에서 저장 버튼을 클릭할 때의 이벤트를 정의합니다.
-		    $("#updateSaveBtn").click(function() {
+		    //modal창의 수정버튼 누르면 
+		    $("#updatebtn").click(function() {
 		        // 수정한 내용을 가져옵니다.
-		        var updatedContent = $("#updateContent").val();
-		        var updatedStar = $("#updateStar").val();
+		        var updatecontent = $("#updatecontent").val();
+		        var updatestar = $("#updatestar").val();
 		        
 		        // 서버로 수정 내용을 전송합니다.
 		        $.ajax({
 		            type: "post",
 		            dataType: "html",
-		            url: "updateanswer.jsp",
-		            data: { "idx": idx, "content": updatedContent, "star": updatedStar },
+		            url: "answer/updateanswer.jsp",
+		            data: { "idx": idx, "content": updatecontent, "star": updatestar },
 		            success: function() {
 		                // 수정 후 모달을 닫고 댓글 목록을 업데이트합니다.
-		                $("#updateModal").modal("hide");
+		                
+		                $("#updatemodal").modal("hide");
 		                list();
 		            }
 		        });
 		    });
+		 // 모달이 닫힐 때 입력 내용 초기화
+		    $('#updatemodal').on('hidden.bs.modal', function() {
+		        $("#updatecontent").val('');
+		        $("#updatestar").val('');
+		    });
+		    
 		});
 
 
@@ -351,7 +354,7 @@ function list() {
                     s += "<td>" + item.content + "</td>";
                     s += "<td>" + item.writeday + "</td>";
                     s +="<td><button type='button' class='btn btn-outline-danger btndel' data-idx='"+item.idx+"'>삭제</button></td>";
-                    s +="<td>" + "<button type='button' class='btn btn-outline-success btnup' data-idx='"+item.idx+"'>수정</button>"+"</td>";
+                    s += "<td><button type='button' class='btn btn-outline-success btnup' data-idx='" + item.idx + "' data-content='" + item.content + "' data-star='" + item.star + "'>수정</button></td>";
                     s += "</tr>";
                 })
             }
@@ -438,7 +441,7 @@ function list() {
 </div>
 
 <!-- 모달 창 -->
-<div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+<div class="modal fade" id="updatemodal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -449,12 +452,12 @@ function list() {
                 <!-- 수정할 내용을 입력할 폼 -->
                 <form>
                     <div class="mb-3">
-                        <label for="updateContent" class="form-label">댓글 내용</label>
-                        <textarea class="form-control" id="updateContent" rows="3"></textarea>
+                        <label for="updatecontent" class="form-label">댓글 내용</label>
+                        <textarea class="form-control" id="updatecontent" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="updateStar" class="form-label">별점</label>
-                        <select class="form-select" id="updateStar">
+                        <label for="updatestar" class="form-label">별점</label>
+                        <select class="form-select" id="updatestar">
                             <option value="1">★</option>
                             <option value="2">★★</option>
                             <option value="3">★★★</option>
@@ -465,8 +468,8 @@ function list() {
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary" id="updateSaveBtn">수정</button>
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">닫기</button>
+                <button type="button" class="btn btn-info" id="updatebtn">수정</button>
             </div>
         </div>
     </div>

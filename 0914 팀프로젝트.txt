@@ -17,5 +17,8 @@ git pull origin master - 남이 작업한게잇을수도잇으니 받아서 최�
 git merge "내가만든브랜치명"  -로컬에 잇는 파일이 바뀜 
 git push origin master - 원격저장소에 잇는 파일까지 수정 
 
+안된다 ㅠㅠ 
+git checkout 
+git switch
 
 

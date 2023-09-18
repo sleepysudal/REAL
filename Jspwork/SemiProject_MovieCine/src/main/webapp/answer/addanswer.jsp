@@ -11,7 +11,6 @@ request.setCharacterEncoding("utf-8");
 
 String content = request.getParameter("content");
 String star = request.getParameter("star");
-//String num = (String)session.getAttribute("mv_no");
 String num = request.getParameter("num");
 String myid=(String)session.getAttribute("myid");
 

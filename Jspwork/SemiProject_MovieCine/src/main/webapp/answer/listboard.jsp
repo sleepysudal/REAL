@@ -61,7 +61,7 @@
    no=totalCount-startNum;
    
    List<AnswerDto> list=adao.getList(num, startNum, perPage);
-   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
+   SimpleDateFormat sdf=new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
    JSONArray arr=new JSONArray();
    for(AnswerDto dto:list)
    {

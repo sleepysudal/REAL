@@ -144,11 +144,11 @@ b{
 
 .detailresult{
    position: absolute;
-   top: 1400px;
-   left: 170px;
+   top: 1200px;
+   left: 270px;
    width: 1030px;
    height: 500px;
-   border: 2px solid white;
+  
 }
 i.penguin{
 font-size: 23pt;
@@ -158,14 +158,18 @@ color: magenta;
 font-size: 18pt;
 }
 #starimage{
-width: 70px;
-height: 70px;
+width: 30px;
+height: 30px;
 }
 .starscore{
 width: 18px;
 height: 18px;
 }
-
+#btnadd{
+background-color: silver;
+border-radius: 10px;
+border: 1px solid gray;
+}
 </style>
 <%
    //절대경로잡기
@@ -197,10 +201,12 @@ String myid = (String)session.getAttribute("myid");
    
 %>
 <script>
-function back(){
+ function back(){
    history.back();
 }
+
 $(function(){
+   
    var currentPage=1;
    list(currentPage);
    
@@ -217,12 +223,17 @@ $(function(){
             url: "answer/addanswer.jsp",
             data: {"content": content, "star": star, "num": <%=num%>},
             success: function(res){
+               
+               
+               
                 //인서트 후 초기화
                 $("#content").val("");
                 $("#star").val("");
+                
+                
                 //다시 리스트 호출
                 list(currentPage);
-                location.reload();
+              
             }
         });
     });
@@ -249,7 +260,7 @@ $(function(){
                     data: { "idx": idx },  
                     success: function() {
                        list(currentPage);
-                        location.reload();
+                        
                     }
                 });
             }
@@ -296,150 +307,133 @@ $(function(){
     });
 });
 
+//list 함수에서 pagination 컨트롤을 그리고 데이터를 가져오도록 수정
     // list 함수에서 pagination 컨트롤을 그리고 데이터를 가져오도록 수정
-    function list(currentPage) {
-       
-        $.ajax({
-            type: "get",
-            url: "answer/listboard.jsp",
-            data: {"num": <%=num%>, "currentPage": currentPage},
-            dataType: "json",
-            success: function(data){
-               calculateAverageRating();
-                var startPage = "";
-                var endPage = "";
-                var totalPage = "";
-                var perPage="";
-                var commentNumber="";
-                
-                var s="<div style='text-align: center;'>";
-                s += "<table class='table' style='width:1030px'>";
-                s += "<caption align='top'><b>댓글목록</b></caption>";
-                
-                /* s += "<tr class='table-info'>";
-                s += "<th>번호</th>";
-                s += "<th>아이디</th>";
-                s += "<th>별점</th>";
-                s += "<th>내용</th>";
-            
-                s += "<th width='160'>작성일</th>";
-                s += "<th width='160'>수정 | 삭제</th>";
-                s += "</tr>"; */
-                
-                
-                if (data.length == 0) {
+   function list(currentPage) {
+    $.ajax({
+        type: "get",
+        url: "answer/listboard.jsp",
+        data: {"num": <%=num%>, "currentPage": currentPage},
+        dataType: "json",
+        success: function(data){
+            calculateAverageRating();
+            var startPage = "";
+            var endPage = "";
+            var totalPage = "";
+            var perPage = "";
+            var commentNumber = "";
+
+            var s = "<div class='answerlist' style='text-align: center;'>";
+            s += "<table class='table table-striped table-primary' style='width: 600px; height: 250px;'>";
+            s += "<caption align='top'><b>댓글 목록</b></caption>";
+
+            if (data.length == 0) {
+                s += "<tr>";
+                s += "<td colspan='4' align='center'>";
+                s += "<b>댓글이 없습니다</b>";
+                s += "</td></tr>";
+            } else {
+                $.each(data, function(i, item){
+                    startPage = item.startPage;
+                    endPage = item.endPage;
+                    totalPage = item.totalPage;
+                    perPage = item.perPage;
+                    commentNumber = (currentPage - 1) * 2 + i + 1;
+
+                    var starimage = "";
+
+                    if (item.star == "1") {
+                        starimage = "<img src='image/angry.png' id='starimage' alt='1 Star'>";
+                    } else if (item.star == "2") {
+                        starimage = "<img src='image/sad.png' id='starimage' alt='2 Star'>";
+                    } else if (item.star == "3") {
+                        starimage = "<img src='image/laughing.png' id='starimage' alt='3 Star'>";
+                    } else if (item.star == "4") {
+                        starimage = "<img src='image/smile.png' id='starimage' alt='4 Star'>";
+                    } else if (item.star == "5") {
+                        starimage = "<img src='image/love.png' id='starimage' alt='5 Star'>";
+                    }
+
                     s += "<tr>";
-                    s += "<td colspan='4' align='center'>";
-                    s += "<b>댓글이 없습니다</b>";
-                    s += "</td></tr>";
-                } else {
-                    $.each(data, function(i, item){
-                        startPage = item.startPage;
-                        endPage = item.endPage;
-                        totalPage = item.totalPage;
-                        perPage=item.perPage;
-                        commentNumber = (currentPage - 1) * perPage + i + 1;
-                        
-                        var starimage = "";
-                        
-                        if (item.star == "1") {
-                            starimage = "<img src='image/angry.png' id='starimage' alt='1 Star'>";
-                        } else if (item.star == "2") {
-                            starimage = "<img src='image/sad.png' id='starimage'alt='2 Star'>";
-                        } else if (item.star == "3") {
-                            starimage = "<img src='image/laughing.png'id='starimage' alt='3 Star'>";
-                        } else if (item.star == "4") {
-                            starimage = "<img src='image/smile.png' id='starimage' alt='4 Star'>";
-                        } else if (item.star == "5") {
-                            starimage = "<img src='image/love.png' id='starimage' alt='5 Star'>";
-                        }
-                        
-                      
-                        
-                        s += "<tr>";
-                        s += "<td align='center' rowspan='2' valign='middle'>" + starimage + "</td>";
-                        s += "<td>" + (item.myid ? item.myid : "비회원") + "</td>"; 
-                        s += "<td>"
-                        s +="<button type='button' class='btn btn-outline-success btnup' data-idx='" + item.idx + "' data-content='" + item.content + "' data-star='" + item.star + "'>수정</button>";
-                        s += "</td>";
-                        s += "</tr>";
-                        s += "<tr>";
-                        s += "<td colspan='2'><textarea readonly style='width:400px;'>" + item.content + "</textarea></td>";
-                        s +="</tr>";
-                        s +="<tr>";
-                        s += "<td colspan='2'>" + item.writeday + "</td>"; 
-                        s += "<td>"
-                        s +="<button type='button' class='btn btn-outline-danger btndel' data-idx='"+  item.idx+"'>삭제</button>";
-                        s +="</td>"
-                        s += "</tr>";
-                    })
-                }
-                s += "</table>";
-                s += "</div>";
+                    s += "<td align='center' valign='middle'>" + starimage + "</td>";
+                    s += "<td><b style='color: blue;'>" + (item.myid ? item.myid : "비회원") + "</b></td>";
+                    s += "<td colspan='2'><textarea readonly style='width: 400px;'>" + item.content + "</textarea></td>";
+                    s += "</tr>";
+                    s += "<tr>";
+                    s += "<td colspan='2'>" + item.writeday + "</td>";
+                    s += "<td colspan='2'><button type='button' class='btn btn-outline-success btnup' data-idx='" + item.idx + "' data-content='" + item.content + "' data-star='" + item.star + "'>수정</button> ";
+                    s += "<button type='button' class='btn btn-outline-danger btndel' data-idx='" + item.idx + "'>삭제</button></td>";
+                    s += "</tr>";
+                });
+            }
+
+            s += "</table>";
+            s += "</div>";
+
+         // pagination 컨트롤을 그리는 코드
+            s += "<div style='width: 600px; text-align: center;'>";
+            s += "<ul class='pagination justify-content-center'>";
+
+            // 이전 버튼
+            if (startPage>=1 && currentPage > 1) {
+                s += "<li class='page-item active'>";
+                s += "<a class='page-link'><i class='bi bi-arrow-left prev' style='cursor:pointer;'></i></a>";
+                s += "</li>";
                 
-                    // pagination 컨트롤을 그리는 코드
-                    s += "<div style='width: 600px; text-align: center;'>";
-                    s += "<ul class='pagination justify-content-center'>";
-
-                    // 이전 버튼
-                    if (startPage>=1 && currentPage > 1) {
-                        s += "<li class='page-item active'>";
-                        s += "<a class='page-link'><i class='bi bi-arrow-left prev' style='cursor:pointer;'></i></a>";
-                        s += "</li>";
-                        
-                     // 이전 버튼 클릭 이벤트 핸들러
-                        $('.detailresult').on('click', '.prev', function(){
-                            if (currentPage > 1) {
-                                currentPage -= 1; // 현재 페이지를 감소시킴
-                                list(currentPage); // 페이지를 다시 불러옴
-                            }
-                        });
+             // 이전 버튼 클릭 이벤트 핸들러
+                $('.detailresult').on('click', '.prev', function(){
+                    if (currentPage > 1) {
+                        currentPage -= 1; // 현재 페이지를 감소시킴
+                        list(currentPage); // 페이지를 다시 불러옴
                     }
+                });
+            }
 
-                    //숫자페이지
-                    for (var pp = startPage; pp <= endPage; pp++) {
-                        if (pp == currentPage) {
-                            s += "<li class='page-item active'>";
-                            s += "<a class='page-link paging' style='cursor:pointer;'>"+pp+"</a>";
-                            s += "</li>";
-                        } else {
-                            s += "<li class='page-item'>";
-                            s += "<a class='page-link paging' style='cursor:pointer;'>"+pp+"</a>";
-                            s += "</li>";
-                        }
-                        
-                     // 페이지번호 클릭 이벤트 핸들러
-                        $('.detailresult').on('click', '.paging', function(){
-                            currentPage = $(this).text().trim();
-                            list(currentPage); // 페이지를 다시 불러옴
-                        });
-                    }
-
-                    // 다음 버튼
-                    if (endPage<=totalPage && currentPage<totalPage) {
-                        s += "<li class='page-item active'>";
-                        s += "<a class='page-link'><i class='bi bi-arrow-right next' style='cursor:pointer;'></i></a>";
-                        s += "</li>";
-                        
-                     // 다음 버튼 클릭 이벤트 핸들러
-                        $('.detailresult').on('click', '.next', function(){
-                            if (currentPage < totalPage) {
-                                currentPage += 1; // 현재 페이지를 증가시킴
-                                list(currentPage); // 페이지를 다시 불러옴
-                            }
-                        });
-                    }
-
-                    s += "</ul>";
-                    s += "</div>";
-                    
-                    //alert("hi");
-                    $(".detailresult").html(s);
+            //숫자페이지
+            for (var pp = startPage; pp <= endPage; pp++) {
+                if (pp == currentPage) {
+                    s += "<li class='page-item active'>";
+                    s += "<a class='page-link paging' style='cursor:pointer;'>"+pp+"</a>";
+                    s += "</li>";
+                } else {
+                    s += "<li class='page-item'>";
+                    s += "<a class='page-link paging' style='cursor:pointer;'>"+pp+"</a>";
+                    s += "</li>";
                 }
-               
-        });
-    }
-    
+                
+             // 페이지번호 클릭 이벤트 핸들러
+                $('.detailresult').on('click', '.paging', function(){
+                    currentPage = $(this).text().trim();
+                    list(currentPage); // 페이지를 다시 불러옴
+                });
+            }
+
+            // 다음 버튼
+            if (endPage<=totalPage && currentPage<totalPage) {
+                s += "<li class='page-item active'>";
+                s += "<a class='page-link'><i class='bi bi-arrow-right next' style='cursor:pointer;'></i></a>";
+                s += "</li>";
+                
+             // 다음 버튼 클릭 이벤트 핸들러
+                $('.detailresult').on('click', '.next', function(){
+                    if (currentPage < totalPage) {
+                        currentPage += 1; // 현재 페이지를 증가시킴
+                        list(currentPage); // 페이지를 다시 불러옴
+                    }
+                });
+            }
+
+            s += "</ul>";
+            s += "</div>";
+            
+            //alert("hi");
+            $(".detailresult").html(s);
+        }
+       
+});
+}
+
+
     function calculateAverageRating() {
        <%
           AnswerDao adao=new AnswerDao();
@@ -458,7 +452,7 @@ $(function(){
           
           //평균 평점
           avgrate=(double)totalrate/(list.size());
-          System.out.printf("%.1f",avgrate);
+          //System.out.printf("%.1f",avgrate);
           
        %>
         //평균평점
@@ -512,10 +506,11 @@ $(function(){
             } else if (avgrate >= 1) {
                 starImages += "<img src='image/onestar.png' class='starscore'>";
             }
-
-            $(".averageRating").html(ratingText + "<br>" + starImages);
-        } else {
-            $(".averageRating").text("관람객 평점: 아직 평가 없음");
+         
+            $("div.averageRating").html(ratingText + "<br>" + starImages);
+        } 
+        else {
+            $("div.averageRating").text("관람객 평점: 아직 평가 없음");
         }
     }
 
@@ -532,7 +527,7 @@ $(function(){
       <div class="detailtitle"><b>영화제목 : <%=dto.getMv_title() %></b></div>
       <div class="detailreserve">예매율 (border-bottom 1px white 추가)</div>
       <div class="detailinfo">장르 : <%=dto.getMv_genre() %><br>개봉 : <%=dto.getMv_opendate() %></div>
-      <div class="averageRating" class="text-white"></div>
+      <div class="averageRating text-white" ></div>
       
       <div class="detailstory"><%=dto.getMv_st() %></div>
       <button type="button" id="detailbtn1" onclick="location='<%=root%>/index.jsp?main=Movie_reserve/movielist.jsp'">예매하기</button>
@@ -546,11 +541,11 @@ $(function(){
          <input type="hidden" id="idx" value="<%=idx %>">
          
          
-         <table class="table table-bordered" style="width:600px; height: 250px;">
+         <table class="table table-striped table-primary">
          <caption align="top"><b>댓글 입력</b></caption>
             <tr>
-               <th align="center" valign="middle" style="width: 150px;">작성자</th>
-               <td><b style="color: blue;">
+                  <td valign="middle"><b style="color: black;">작성자:</b> 
+                  <b style="color: blue;">
                   <%
             if (myid == null || myid == "") {
              myid = "비회원";
@@ -558,35 +553,28 @@ $(function(){
             %>
             
            <%= myid %>
-           
                </b></td>
-            </tr>
-            
-            <tr>
-               <th align="center" valign="middle" style="width: 100px;">댓글작성</th>
+               
+               <td style="color: black;" valign="middle"><b style="color: black;">별점</b></td>
                <td>
-               <textarea id="content" class="form-control"
-               placeholder="댓글을 입력해주세요"></textarea>
-               </td>
-            </tr>
-            
-            <tr>
-               <th align="center" valign="middle" style="width: 100px;">별점</th>
-               <td>
-               <select name="star" id="star" style="width:100px;">
-                  <option value="1">★</option>
-                  <option value="2">★★</option>
-                  <option value="3">★★★</option>
-                  <option value="4">★★★★</option>
+               <select name="star" id="star" style="width:100px; color: gold;" class="form-control">
+                  <option value="1" >★</option>
+                  <option value="2" >★★</option>
+                  <option value="3" >★★★</option>
+                  <option value="4" >★★★★</option>
                   <option value="5" selected>★★★★★</option>
                </select>
                </td>
             </tr>
             
             <tr>
-               <th align="center" valign="middle">댓글등록</th>
-               <td colspan="2">
-                  <button type="button" class="btn btn-outline-danger" id="btnadd"><i class="bi bi-tencent-qq penguin"></i></button>
+               
+               <td valign="middle">
+               <textarea id="content" class="form-control" style="width: 500px;"
+               placeholder="댓글을 입력해주세요"></textarea>
+               </td>
+                 <td colspan="2" align="center" valign="middle">
+                  <button type="button" id="btnadd"><b style="color: black;">댓글등록</b></button>
                </td>
             </tr>
          </table>

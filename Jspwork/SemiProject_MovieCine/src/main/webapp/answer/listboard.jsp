@@ -21,7 +21,7 @@
    int startPage; //각 블럭에서 보여질 시작페이지
    int endPage; //각 블럭에서 보여질 끝페이지
    int start; //db에서 가져올 글의 시작번호(mysql은 첫글이 0,오라클은 1)
-   int perPage=5; //한 페이지당 보여질 글의갯수
+   int perPage=4; //한 페이지당 보여질 글의갯수
    int perBlock=5; //한 페이지당 보여질 페이지 갯수
    /* int currentPage; //현재 페이지 */
    int no; //각페이지당 출력할 시작번호
@@ -61,7 +61,7 @@
    no=totalCount-startNum;
    
    List<AnswerDto> list=adao.getList(num, startNum, perPage);
-   SimpleDateFormat sdf=new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm");
    JSONArray arr=new JSONArray();
    for(AnswerDto dto:list)
    {

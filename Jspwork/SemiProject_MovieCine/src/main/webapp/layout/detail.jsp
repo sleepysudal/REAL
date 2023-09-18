@@ -148,7 +148,7 @@ b{
    left: 270px;
    width: 1030px;
    height: 500px;
-  
+   /* border: 2px solid white; */
 }
 i.penguin{
 font-size: 23pt;
@@ -206,7 +206,7 @@ String myid = (String)session.getAttribute("myid");
 }
 
 $(function(){
-   
+	
    var currentPage=1;
    list(currentPage);
    
@@ -223,9 +223,9 @@ $(function(){
             url: "answer/addanswer.jsp",
             data: {"content": content, "star": star, "num": <%=num%>},
             success: function(res){
-               
-               
-               
+            	
+            	
+            	
                 //인서트 후 초기화
                 $("#content").val("");
                 $("#star").val("");
@@ -233,7 +233,8 @@ $(function(){
                 
                 //다시 리스트 호출
                 list(currentPage);
-              
+             // ratingText와 stars 업데이트
+                updateRatingAndStars();
             }
         });
     });
@@ -260,6 +261,8 @@ $(function(){
                     data: { "idx": idx },  
                     success: function() {
                        list(currentPage);
+                    // ratingText와 stars 업데이트
+                       updateRatingAndStars();
                         
                     }
                 });
@@ -294,7 +297,8 @@ $(function(){
                     // 수정 후 모달을 닫고 댓글 목록을 업데이트합니다.
                     $("#updatemodal").modal("hide");
                     list(currentPage);
-                    location.reload();
+                 // ratingText와 stars 업데이트
+                    updateRatingAndStars();
                 }
             });
         });
@@ -307,23 +311,24 @@ $(function(){
     });
 });
 
+
 //list 함수에서 pagination 컨트롤을 그리고 데이터를 가져오도록 수정
-    // list 함수에서 pagination 컨트롤을 그리고 데이터를 가져오도록 수정
-   function list(currentPage) {
+function list(currentPage) {
     $.ajax({
         type: "get",
         url: "answer/listboard.jsp",
         data: {"num": <%=num%>, "currentPage": currentPage},
         dataType: "json",
         success: function(data){
-            calculateAverageRating();
             var startPage = "";
             var endPage = "";
             var totalPage = "";
             var perPage = "";
             var commentNumber = "";
+            
+            updateRatingAndStars();
 
-            var s = "<div class='answerlist' style='text-align: center;'>";
+            var s = "<div>";
             s += "<table class='table table-striped table-primary' style='width: 600px; height: 250px;'>";
             s += "<caption align='top'><b>댓글 목록</b></caption>";
 
@@ -356,13 +361,13 @@ $(function(){
 
                     s += "<tr>";
                     s += "<td align='center' valign='middle'>" + starimage + "</td>";
-                    s += "<td><b style='color: blue;'>" + (item.myid ? item.myid : "비회원") + "</b></td>";
+                    s += "<td valign='middle'><b style='color: blue;'>" + (item.myid ? item.myid : "비회원") + "</b></td>";
                     s += "<td colspan='2'><textarea readonly style='width: 400px;'>" + item.content + "</textarea></td>";
                     s += "</tr>";
                     s += "<tr>";
-                    s += "<td colspan='2'>" + item.writeday + "</td>";
-                    s += "<td colspan='2'><button type='button' class='btn btn-outline-success btnup' data-idx='" + item.idx + "' data-content='" + item.content + "' data-star='" + item.star + "'>수정</button> ";
-                    s += "<button type='button' class='btn btn-outline-danger btndel' data-idx='" + item.idx + "'>삭제</button></td>";
+                    s += "<td colspan='2' valign='middle'>" + item.writeday + "</td>";
+                    s += "<td colspan='2' align='right'><button type='button' class='btn btn-outline-success btnup' data-idx='" + item.idx + "' data-content='" + item.content + "' data-star='" + item.star + "'><i class='bi bi-pencil-square'></i></button> ";
+                    s += "<button type='button' class='btn btn-outline-danger btndel' data-idx='" + item.idx + "'><i class='bi bi-trash3-fill'></i></button></td>";
                     s += "</tr>";
                 });
             }
@@ -428,91 +433,82 @@ $(function(){
             
             //alert("hi");
             $(".detailresult").html(s);
-        }
+            
        
-});
+            
+
+        }
+        
+    });
 }
 
+function updateRatingAndStars() {
+    $.ajax({
+        type: "get",
+        url: "answer/calculate.jsp",
+        data: { "num": <%=num%> },
+        dataType: "json",
+        success: function(data) {
+            if (data.length > 0) { // data가 배열인지 확인
+                var avgrate = data[0].avgrate.toFixed(1);
+                var totalcomment = data[0].totalcomment;
+                var totalrate = data[0].totalrate;
+                var stars="";
 
-    function calculateAverageRating() {
-       <%
-          AnswerDao adao=new AnswerDao();
-          List<AnswerDto>list=adao.getAllAnswers(num);
-          int totalrate=0;
-          double avgrate=0;
-          
-          
-          for(AnswerDto adto:list)
-          {
-             //총 평점
-             totalrate+=Integer.parseInt(adto.getStar());
-             
-             
-          }
-          
-          //평균 평점
-          avgrate=(double)totalrate/(list.size());
-          //System.out.printf("%.1f",avgrate);
-          
-       %>
-        //평균평점
-      var avgrate=<%=avgrate%>.toFixed(1);
-      
-      //총댓글수
-      var totalcomment=<%=list.size()%>;
-      
-        if (totalcomment > 0) {
-            
-            var ratingText = "관람객 평점: " + avgrate + "\t(총\t" + totalcomment + "명이 평가해주셨습니다.)";
+                if (totalcomment > 0) {
+                    var ratingText = "관람객 평점: " + avgrate + "\t(총\t" + totalcomment + "명이 평가해주셨습니다.)";
+                 
+                    // 별 이미지 출력을 위한 변수 
+                    var stars = "";
 
-            // 별 이미지 출력을 위한 변수 
-            var starImages = "";
-
-            // 별 이미지를 조건에 따라 설정
-            if (avgrate == 5) {
-                for (var i = 1; i <= 5; i++) {
-                    starImages += "<img src='image/onestar.png' class='starscore'>";
+                    // 별 이미지를 조건에 따라 설정
+                    if (avgrate == 5) {
+                        for (var i = 1; i <= 5; i++) {
+                        	stars += "<img src='image/onestar.png' class='starscore'>";
+                        }
+                    } else if (avgrate >= 4.5) {
+                        for (var i = 1; i <= 4; i++) {
+                        	stars += "<img src='image/onestar.png' class='starscore'>";
+                        }
+                        stars += "<img src='image/halfstar.png' class='starscore'>";
+                    } else if (avgrate >= 4) {
+                        for (var i = 1; i <= 4; i++) {
+                        	stars += "<img src='image/onestar.png' class='starscore'>";
+                        }
+                    } else if (avgrate >= 3.5) {
+                        for (var i = 1; i <= 3; i++) {
+                        	stars += "<img src='image/onestar.png' class='starscore'>";
+                        }
+                        stars += "<img src='image/halfstar.png' class='starscore'>";
+                    } else if (avgrate >= 3) {
+                        for (var i = 1; i <= 3; i++) {
+                        	stars += "<img src='image/onestar.png' class='starscore'>";
+                        }
+                    } else if (avgrate >= 2.5) {
+                        for (var i = 1; i <= 2; i++) {
+                        	stars += "<img src='image/onestar.png' class='starscore'>";
+                        }
+                        stars += "<img src='image/halfstar.png' class='starscore'>";
+                    } else if (avgrate >= 2) {
+                        for (var i = 1; i <= 2; i++) {
+                        	stars += "<img src='image/onestar.png' class='starscore'>";
+                        }
+                    } else if (avgrate >= 1.5) {
+                    	stars += "<img src='image/onestar.png' class='starscore'>";
+                    	stars += "<img src='image/halfstar.png' class='starscore'>";
+                    } else if (avgrate >= 1) {
+                    	stars += "<img src='image/onestar.png' class='starscore'>";
+                    }
+                    
+                    $("div.averageRating").html(ratingText + "<br>" + stars);
+                } else {
+                    $("div.averageRating").text("관람객 평점: 아직 평가 없음");
                 }
-            } else if (avgrate >= 4.5) {
-                for (var i = 1; i <= 4; i++) {
-                    starImages += "<img src='image/onestar.png' class='starscore'>";
-                }
-                starImages += "<img src='image/halfstar.png' class='starscore'>";
-            } else if (avgrate >= 4) {
-                for (var i = 1; i <= 4; i++) {
-                    starImages += "<img src='image/onestar.png' class='starscore'>";
-                }
-            } else if (avgrate >= 3.5) {
-                for (var i = 1; i <= 3; i++) {
-                    starImages += "<img src='image/onestar.png' class='starscore'>";
-                }
-                starImages += "<img src='image/halfstar.png' class='starscore'>";
-            } else if (avgrate >= 3) {
-                for (var i = 1; i <= 3; i++) {
-                    starImages += "<img src='image/onestar.png' class='starscore'>";
-                }
-            } else if (avgrate >= 2.5) {
-                for (var i = 1; i <= 2; i++) {
-                    starImages += "<img src='image/onestar.png' class='starscore'>";
-                }
-                starImages += "<img src='image/halfstar.png' class='starscore'>";
-            } else if (avgrate >= 2) {
-                for (var i = 1; i <= 2; i++) {
-                    starImages += "<img src='image/onestar.png' class='starscore'>";
-                }
-            } else if (avgrate >= 1.5) {
-                starImages += "<img src='image/onestar.png' class='starscore'>";
-                starImages += "<img src='image/halfstar.png' class='starscore'>";
-            } else if (avgrate >= 1) {
-                starImages += "<img src='image/onestar.png' class='starscore'>";
             }
-         
-            $("div.averageRating").html(ratingText + "<br>" + starImages);
-        } 
-        else {
-            $("div.averageRating").text("관람객 평점: 아직 평가 없음");
         }
-    }
+
+    });
+}
 
 
 </script>
@@ -555,8 +551,8 @@ $(function(){
            <%= myid %>
                </b></td>
                
-               <td style="color: black;" valign="middle"><b style="color: black;">별점</b></td>
-               <td>
+            	<td style="color: black;" valign="middle"><b style="color: black;">별점</b></td>
+            	<td>
                <select name="star" id="star" style="width:100px; color: gold;" class="form-control">
                   <option value="1" >★</option>
                   <option value="2" >★★</option>
